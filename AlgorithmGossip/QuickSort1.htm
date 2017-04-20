@@ -41,11 +41,11 @@
     <li>如果 i &gt;= j，则离开迴圈</li>
     <li>如果 i &lt; j，则交换索引i与j两处的值</li>
     <li>将左侧的轴与 j 进行交换</li>
-    <li>对轴左边进行递迴</li>
-    <li>对轴右边进行递迴</li>
+    <li>对轴左边进行递归</li>
+    <li>对轴右边进行递归</li>
 </ol>
 <br>
-透过以下演算法，则轴左边的值都会小于s，轴右边的值都会大于s，如此再对轴左右两边进行递迴，就可以对完成排序的目的，例如下面的实例，*表示要交换的数，[]表示轴：<br>
+透过以下算法，则轴左边的值都会小于s，轴右边的值都会大于s，如此再对轴左右两边进行递归，就可以对完成排序的目的，例如下面的实例，*表示要交换的数，[]表示轴：<br>
 <ul>
     <li>[41]　24　76*　11　45　64　21　69　19　36*</li>
     <li>[41]　24　36　11　45*　64　21　69　19*　76</li>
@@ -54,7 +54,7 @@
     <li>21　24　36　11　19　[41]　64　69　45　76</li>
 </ul>
 <br>
-在上面的例子中，41左边的值都比它小，而右边的值都比它大，如此左右再进行递迴至排序完成。 <br>
+在上面的例子中，41左边的值都比它小，而右边的值都比它大，如此左右再进行递归至排序完成。 <br>
 
 <h2> 实现</h2>
 
@@ -63,7 +63,7 @@
     </li>
 </ul>
 
-<pre>#include &lt;stdio.h&gt; <br>#include &lt;stdlib.h&gt; <br>#include &lt;time.h&gt; <br>#define MAX 10 <br>#define SWAP(x,y) {int t; t = x; x = y; y = t;} <br><br>void quicksort(int[], int, int); <br><br>int main(void) { <br>    int number[MAX] = {0}; <br>    int i, num;  <br><br>    srand(time(NULL)); <br><br>    printf("排序前："); <br>    for(i = 0; i &lt; MAX; i++) { <br>        number[i] = rand() % 100; <br>        printf("%d ", number[i]); <br>    } <br><br>    quicksort(number, 0, MAX-1); <br><br>    printf("\n排序后："); <br>    for(i = 0; i &lt; MAX; i++) <br>        printf("%d ", number[i]); <br>    <br>    printf("\n"); <br><br>    return 0; <br>} <br><br>void quicksort(int number[], int left, int right) { <br>    int i, j, s; <br><br>    if(left &lt; right) { <br>        s = number[left]; <br>        i = left; <br>        j = right + 1; <br><br>        while(1) { <br>            // 向右找<br>            while(i + 1 &lt; number.length &amp;&amp; number[++i] &lt; s) ;  <br>            // 向左找  <br>            while(j -1 &gt; -1 &amp;&amp; number[--j] &gt; s) ;  <br>            if(i &gt;= j) <br>                break; <br>            SWAP(number[i], number[j]); <br>        } <br><br>        number[left] = number[j]; <br>        number[j] = s; <br><br>        quicksort(number, left, j-1);   // 对左边进行递迴 <br>        quicksort(number, j+1, right);  // 对右边进行递迴 <br>    } <br>} <br></pre>
+<pre>#include &lt;stdio.h&gt; <br>#include &lt;stdlib.h&gt; <br>#include &lt;time.h&gt; <br>#define MAX 10 <br>#define SWAP(x,y) {int t; t = x; x = y; y = t;} <br><br>void quicksort(int[], int, int); <br><br>int main(void) { <br>    int number[MAX] = {0}; <br>    int i, num;  <br><br>    srand(time(NULL)); <br><br>    printf("排序前："); <br>    for(i = 0; i &lt; MAX; i++) { <br>        number[i] = rand() % 100; <br>        printf("%d ", number[i]); <br>    } <br><br>    quicksort(number, 0, MAX-1); <br><br>    printf("\n排序后："); <br>    for(i = 0; i &lt; MAX; i++) <br>        printf("%d ", number[i]); <br>    <br>    printf("\n"); <br><br>    return 0; <br>} <br><br>void quicksort(int number[], int left, int right) { <br>    int i, j, s; <br><br>    if(left &lt; right) { <br>        s = number[left]; <br>        i = left; <br>        j = right + 1; <br><br>        while(1) { <br>            // 向右找<br>            while(i + 1 &lt; number.length &amp;&amp; number[++i] &lt; s) ;  <br>            // 向左找  <br>            while(j -1 &gt; -1 &amp;&amp; number[--j] &gt; s) ;  <br>            if(i &gt;= j) <br>                break; <br>            SWAP(number[i], number[j]); <br>        } <br><br>        number[left] = number[j]; <br>        number[j] = s; <br><br>        quicksort(number, left, j-1);   // 对左边进行递归 <br>        quicksort(number, j+1, right);  // 对右边进行递归 <br>    } <br>} <br></pre>
 
 <br>
 
@@ -72,7 +72,7 @@
     </li>
 </ul>
 
-<pre>public class QuickSort {<br>    public static void sort(int[] number) {<br>        sort(number, 0, number.length-1);<br>    }<br>    <br>    private static void sort(int[] number, <br>                             int left, int right) {<br>        if(left &lt; right) { <br>            int s = number[left]; <br>            int i = left; <br>            int j = right + 1; <br><br>            while(true) { <br>                // 向右找 <br>                while(i + 1 &lt; number.length &amp;&amp; number[++i] &lt; s) ;  <br>                // 向左找 <br>                while(j -1 &gt; -1 &amp;&amp; number[--j] &gt; s) ;  <br>                if(i &gt;= j) <br>                    break; <br>                swap(number, i, j); <br>            } <br><br>            number[left] = number[j]; <br>            number[j] = s; <br><br>            sort(number, left, j-1);   // 对左边进行递迴 <br>            sort(number, j+1, right);  // 对右边进行递迴 <br>        }<br>    }<br>    <br>    private static void swap(int[] number, int i, int j) {<br>        int t; <br>        t = number[i]; <br>        number[i] = number[j]; <br>        number[j] = t;<br>    }<br>}</pre>
+<pre>public class QuickSort {<br>    public static void sort(int[] number) {<br>        sort(number, 0, number.length-1);<br>    }<br>    <br>    private static void sort(int[] number, <br>                             int left, int right) {<br>        if(left &lt; right) { <br>            int s = number[left]; <br>            int i = left; <br>            int j = right + 1; <br><br>            while(true) { <br>                // 向右找 <br>                while(i + 1 &lt; number.length &amp;&amp; number[++i] &lt; s) ;  <br>                // 向左找 <br>                while(j -1 &gt; -1 &amp;&amp; number[--j] &gt; s) ;  <br>                if(i &gt;= j) <br>                    break; <br>                swap(number, i, j); <br>            } <br><br>            number[left] = number[j]; <br>            number[j] = s; <br><br>            sort(number, left, j-1);   // 对左边进行递归 <br>            sort(number, j+1, right);  // 对右边进行递归 <br>        }<br>    }<br>    <br>    private static void swap(int[] number, int i, int j) {<br>        int t; <br>        t = number[i]; <br>        number[i] = number[j]; <br>        number[j] = t;<br>    }<br>}</pre>
 <br>
 <br>
 <br>

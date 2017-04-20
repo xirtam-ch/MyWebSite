@@ -25,12 +25,12 @@
 <h2>&nbsp;说明</h2>
 西洋棋中的皇后可以直线前进，吃掉遇到的所有棋子，如果棋盘上有八个皇后，则这八个皇后如何相安无事的放置在棋盘上，1970年与1971年， E.W.Dijkstra与N.Wirth曾经用这个问题来讲解程序设计之技巧。<br>
 <h2>解法</h2>
-关于棋盘的问题，都可以用递迴求解，然而如何减少递迴的次数？在八个皇后的问题中，不必要所有的格子都检查过，例如若某列检查过，该该列的其它格子就不用再检查了，这个方法称为分支修剪。 <br>
+关于棋盘的问题，都可以用递归求解，然而如何减少递归的次数？在八个皇后的问题中，不必要所有的格子都检查过，例如若某列检查过，该该列的其它格子就不用再检查了，这个方法称为分支修剪。 <br>
 <div style="text-align: center;"><img style="width: 169px; height: 167px;" alt="八个皇后" title="八个皇后"
                                       src="images/eightQueen-1.jpg"><br>
     <br>
     <br>
-    所以检查时，先判断是否在已放置皇后的可行进方向上，如果没有再行放置下一个皇后，如此就可大大减少递迴的次数，例如以下为修剪过后的递迴检查行进路径：<br>
+    所以检查时，先判断是否在已放置皇后的可行进方向上，如果没有再行放置下一个皇后，如此就可大大减少递归的次数，例如以下为修剪过后的递归检查行进路径：<br>
     <img style="width: 517px; height: 229px;" alt="八个皇后" title="八个皇后" src="images/eightQueen-2.jpg"><br>
     <div style="text-align: left;"><br>
         八个皇后的话，会有92个解答，如果考虑棋盘的旋转，则旋转后扣去对称的，会有12组基本解。&nbsp;
@@ -44,7 +44,7 @@
     </li>
 </ul>
 
-<pre>#include &lt;stdio.h&gt; <br>#include &lt;stdlib.h&gt; <br>#define N 8 <br><br>int column[N+1]; // 同栏是否有皇后，1表示有 <br>int rup[2*N+1]; // 右上至左下是否有皇后 <br>int lup[2*N+1]; // 左上至右下是否有皇后 <br>int queen[N+1] = {0}; <br>int num; // 解答编号 <br><br>void backtrack(int); // 递迴求解 <br><br>int main(void) { <br>    int i; <br>    num = 0; <br><br>    for(i = 1; i &lt;= N; i++) <br>        column[i] = 1; <br><br>    for(i = 1; i &lt;= 2*N; i++) <br>        rup[i] = lup[i] = 1; <br><br>    backtrack(1); <br><br>    return 0; <br>} <br><br>void showAnswer() {<br>    int x, y;<br>    printf("\n解答 %d\n", ++num);<br>    for(y = 1; y &lt;= N; y++) {<br>        for(x = 1; x &lt;= N; x++) {<br>            if(queen[y] == x) {<br>                printf(" Q");<br>            }<br>            else {<br>                printf(" .");<br>            }<br>        }<br>        printf("\n");<br>    }<br>}<br><br>void backtrack(int i) { <br>    int j;<br><br>    if(i &gt; N) { <br>        showAnswer();<br>    } <br>    else { <br>        for(j = 1; j &lt;= N; j++) { <br>            if(column[j] == 1 &amp;&amp; <br>                 rup[i+j] == 1 &amp;&amp; lup[i-j+N] == 1) { <br>                queen[i] = j; <br>                // 设定为佔用<br>                column[j] = rup[i+j] = lup[i-j+N] = 0; <br>                backtrack(i+1); <br>                column[j] = rup[i+j] = lup[i-j+N] = 1; <br>            } <br>        } <br>    } <br>} <br></pre>
+<pre>#include &lt;stdio.h&gt; <br>#include &lt;stdlib.h&gt; <br>#define N 8 <br><br>int column[N+1]; // 同栏是否有皇后，1表示有 <br>int rup[2*N+1]; // 右上至左下是否有皇后 <br>int lup[2*N+1]; // 左上至右下是否有皇后 <br>int queen[N+1] = {0}; <br>int num; // 解答编号 <br><br>void backtrack(int); // 递归求解 <br><br>int main(void) { <br>    int i; <br>    num = 0; <br><br>    for(i = 1; i &lt;= N; i++) <br>        column[i] = 1; <br><br>    for(i = 1; i &lt;= 2*N; i++) <br>        rup[i] = lup[i] = 1; <br><br>    backtrack(1); <br><br>    return 0; <br>} <br><br>void showAnswer() {<br>    int x, y;<br>    printf("\n解答 %d\n", ++num);<br>    for(y = 1; y &lt;= N; y++) {<br>        for(x = 1; x &lt;= N; x++) {<br>            if(queen[y] == x) {<br>                printf(" Q");<br>            }<br>            else {<br>                printf(" .");<br>            }<br>        }<br>        printf("\n");<br>    }<br>}<br><br>void backtrack(int i) { <br>    int j;<br><br>    if(i &gt; N) { <br>        showAnswer();<br>    } <br>    else { <br>        for(j = 1; j &lt;= N; j++) { <br>            if(column[j] == 1 &amp;&amp; <br>                 rup[i+j] == 1 &amp;&amp; lup[i-j+N] == 1) { <br>                queen[i] = j; <br>                // 设定为佔用<br>                column[j] = rup[i+j] = lup[i-j+N] = 0; <br>                backtrack(i+1); <br>                column[j] = rup[i+j] = lup[i-j+N] = 1; <br>            } <br>        } <br>    } <br>} <br></pre>
 
 <br>
 

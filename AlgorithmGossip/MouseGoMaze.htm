@@ -23,11 +23,11 @@
 
 
 <h2>&nbsp;说明</h2>
-老鼠走迷宫是递迴求解的基本题型，我们在二维阵列中使用2表示迷宫牆壁，使用1来表示老鼠的行走路径，试以程序求出由入口至出口的路径。<br>
+老鼠走迷宫是递归求解的基本题型，我们在二维阵列中使用2表示迷宫牆壁，使用1来表示老鼠的行走路径，试以程序求出由入口至出口的路径。<br>
 <h2>解法</h2>
-老鼠的走法有上、左、下、右四个方向，在每前进一格之后就选一个方向前进，无法前进时退回选择下一个可前进方向，如此在阵列中依序测试四个方向，直到走到出口为止，这是递迴的基本题，请直接看程序应就可以理解。 <br>
+老鼠的走法有上、左、下、右四个方向，在每前进一格之后就选一个方向前进，无法前进时退回选择下一个可前进方向，如此在阵列中依序测试四个方向，直到走到出口为止，这是递归的基本题，请直接看程序应就可以理解。 <br>
 <br>
-<h2> 演算法</h2>
+<h2> 算法</h2>
 
 <pre>Procedure GO(maze[]) [<br>    VISIT(maze, STARTI, STARTJ);<br>]<br>    <br>Procedure VISIT(maze[], i, j) [<br>    maze[i][j] = 1; <br><br>    IF(i == ENDI AND j == ENDJ) <br>        success = TRUE; <br><br>    IF(success != TRUE AND maze[i][j+1] == 0)<br>        VISIT(maze, i, j+1); <br>    IF(success != TRUE AND maze[i+1][j] == 0)<br>        VISIT(maze, i+1, j); <br>    IF(success != TRUE AND maze[i][j-1] == 0)<br>        VISIT(maze, i, j-1); <br>    if(success != TRUE AND maze[i-1][j] == 0)<br>        VISIT(maze, i-1, j); <br><br>    IF(success != TRUE) <br>        maze[i][j] = 0; <br>] <br></pre>
 

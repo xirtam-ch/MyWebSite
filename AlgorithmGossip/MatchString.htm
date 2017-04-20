@@ -23,7 +23,7 @@
 
 
 <h2>&nbsp;说明</h2>
-今日的一些高阶程式语言对于字串的处理支援越来越强大（例如Java、Perl等），不过字串搜寻本身仍是个值得探讨的课题，在这边以Boyer- Moore法来说明如何进行字串说明，这个方法快且原理简洁易懂。<br>
+今日的一些高阶程序语言对于字串的处理支援越来越强大（例如Java、Perl等），不过字串搜寻本身仍是个值得探讨的课题，在这边以Boyer- Moore法来说明如何进行字串说明，这个方法快且原理简洁易懂。<br>
 <h2>解法</h2>
 字串搜寻本身不难，使用暴力法也可以求解，但如何快速搜寻字串就不简单了，传统的字串搜寻是从关键字与字串的开头开始比对，例如 <a
         href="http://www.ics.uci.edu/%7Eeppstein/161/960227.html">Knuth-Morris-Pratt 演算法</a>
@@ -32,7 +32,7 @@
 <div style="text-align: center;"><img style="width: 271px; height: 87px;" alt="字串核对" title="字串核对"
                                       src="images/matchString-1.jpg"><br>
     <br>
-    <div style="text-align: left;">那麽前进表该如何前进，举个实际的例子，如果要在字串中搜寻JUST这个字串，则可能遇到的几个情况如下所示：<br>
+    <div style="text-align: left;">那么前进表该如何前进，举个实际的例子，如果要在字串中搜寻JUST这个字串，则可能遇到的几个情况如下所示：<br>
         <div style="text-align: center;"><img style="width: 364px; height: 367px;" alt="字串核对" title="字串核对"
                                               src="images/matchString-2.jpg"><br>
             <br>
@@ -62,7 +62,7 @@
 
         如果关键字中有重複出现的字元，则前进值就会有两个以上的值，此时则取前进值较小的值，如此就不会跳过可能的位置，例如texture这个关键字，t的前
         进值应该取后面的3而不是取前面的7。<br>
-        <h2> 实作</h2>
+        <h2> 实现</h2>
 
         <ul>
             <li> C

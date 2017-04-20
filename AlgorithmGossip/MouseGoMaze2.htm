@@ -25,13 +25,13 @@
 <h2>&nbsp;说明</h2>
 由于迷宫的设计，老鼠走迷宫的入口至出口路径可能不只一条，如何求出所有的路径呢？<br>
 <h2>解法</h2>
-求所有路径看起来複杂但其实更简单，只要在老鼠走至出口时显示经过的路径，然后退回上一格重新选择下一个位置继续递迴就可以了，比求出单一路径还简单，我们的程式只要作一点修改就可以了。 <br>
+求所有路径看起来複杂但其实更简单，只要在老鼠走至出口时显示经过的路径，然后退回上一格重新选择下一个位置继续递迴就可以了，比求出单一路径还简单，我们的程序只要作一点修改就可以了。 <br>
 <h2> 演算法</h2>
 
 <pre>Procedure GO(maze[]) [<br>    VISIT(maze, STARTI, STARTJ);<br>]<br>    <br>Procedure VISIT(maze[], i, j) [<br>    maze[i][j] = 1; <br><br>    IF(i == ENDI AND j == ENDJ) [<br>        // FIND A ROUTE, PRINT THE ROUTE<br>    ]<br><br>    IF(maze[i][j+1] == 0)<br>        VISIT(maze, i, j+1); <br>    IF(maze[i+1][j] == 0)<br>        VISIT(maze, i+1, j); <br>    IF(maze[i][j-1] == 0)<br>        VISIT(maze, i, j-1); <br>    if(maze[i-1][j] == 0)<br>        VISIT(maze, i-1, j); <br><br>    maze[i][j] = 0; <br>] <br></pre>
 
 
-<h2> 实作</h2>
+<h2> 实现</h2>
 
 <ul>
     <li> C

@@ -32,7 +32,7 @@
 
 <h2>解法</h2>
 
-在一条绳子上移动，在程式中也就意味只能使用一个阵列，而不使用其它的阵列来作辅助，问题的解法很简单，您可以自己想像一下在移动旗子，从绳子开头进行，遇到蓝色往前移，遇到白色留在中间，遇到红色往后移，如下所示： <br>
+在一条绳子上移动，在程序中也就意味只能使用一个阵列，而不使用其它的阵列来作辅助，问题的解法很简单，您可以自己想像一下在移动旗子，从绳子开头进行，遇到蓝色往前移，遇到白色留在中间，遇到红色往后移，如下所示： <br>
 
 
 <div style="text-align: center;"><img style="width: 504px; height: 208px;" alt="三色旗" title="三色旗"
@@ -55,7 +55,7 @@
 
 <br>
 
-注意B、W、R并不是三色旗的个数，它们只是一个移动的指标；什麽时候移动结束呢？一开始时未处理的R指标会是等于旗子的总数，当R的索引数减至少于W的索引数时，表示接下来的旗子就都是红色了，此时就可以结束移动，如下所示： <br>
+注意B、W、R并不是三色旗的个数，它们只是一个移动的指标；什么时候移动结束呢？一开始时未处理的R指标会是等于旗子的总数，当R的索引数减至少于W的索引数时，表示接下来的旗子就都是红色了，此时就可以结束移动，如下所示： <br>
 
 <div style="text-align: center;"><img style="width: 502px; height: 236px;" alt="三色旗" title="三色旗"
                                       src="images/threeColorsFlags-2.jpg"></div>
@@ -71,7 +71,7 @@
 <pre>Procedure MOVE(Flags[]) [<br>    wFlag = 0;<br>    Flag = 0;<br>    rFlag = LENGTH(Flags[]) - 1;<br><br>    WHILE(wFlag &lt;= rFlag) [<br>        IF(Flags[wFlag] == 'W') [<br>            wFlag = wFlag + 1;<br>        ]<br>        ELSE IF(Flags[wFlag] == 'B') [<br>            SWAP(Flags[], bFlag, wFlag);<br>            bFlag = bFlag + 1;<br>            wFlag = wFlag + 1;<br>        ]<br>        ELSE [<br>            WHILE(wFlag &lt; rFlag &amp;&amp; Flags[rFlag] == 'R')<br>                rFlag = rFlag - 1;<br>            SWAP(Flags[], rFlag, wFlag);<br>            rFlag = rFlag - 1;                <br>        ]<br>    ]<br>]<br></pre>
 
 
-<h2> 实作</h2>
+<h2> 实现</h2>
 
 
 <ul>

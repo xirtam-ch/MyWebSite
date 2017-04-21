@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+    <title>在线 Markdown 编译器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+    <meta http-equiv="Content-Language" content="zh-CN"/>
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/basic.css?20120912" type="text/css"/>
+    <script type="text/javascript" src='../js/jquery/jquery-1.7.2.js'></script>
+    <script type="text/javascript" src='../js/jquery/jquery.cookies.2.2.0.min.js'></script>
+    <link rel="stylesheet" href='../css/bootstrap.min.css'/>
+    <script src='../js/bootstrap.min.js'></script>
+
+</head>
+<body>
+<!--     头部header开始    -->
+<div id="header">
+    <div class="wrapper">
+        <div id="mainSearch">
+
+            <!-- Put the following javascript before the closing </head> tag. -->
+            <style>
+                .go_search {
+                    width: 300px;
+                }
+
+                .go_search .gsc-input td, .go_search .gsc-input tddiv {
+                    padding: 0 0 0 0;
+                    margin: 0 0 0 0;
+                    height: 23px;
+                }
+
+                .go_search .gsc-input input:focus {
+                    border: none;
+
+                }
+
+                .go_search .gsc-input input {
+                    border: none;
+                    height: 23px;
+                    width: 100%;
+                    padding: 0px;
+                    border: none;
+                    margin: 0px;
+                    height: auto;
+                    outline: none;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    background-image: url(../img/google_custom_search_watermark.gif?20140625);
+                    background-color: rgb(255, 255, 255);
+                    background-position: 0% 50%;
+                    background-repeat: no-repeat no-repeat;
+                }
+            </style>
+
+            <div class="go_search">
+                <!-- Place this tag where you want the search box to render -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--     头部header结束    -->
+<link rel="stylesheet" type="text/css" href="../js/CodeMirror-2.25/lib/codemirror.css"/>
+<script type="text/javascript" src="../js/CodeMirror-2.25/lib/codemirror.js"></script>
+<script type="text/javascript" src="../js/CodeMirror-2.25/mode/xml/xml.js"></script>
+<script type="text/javascript" src="../js/CodeMirror-2.25/mode/htmlmixed/htmlmixed.js"></script>
+<script type="text/javascript" src="../js/CodeMirror-2.25/mode/markdown/markdown.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/Markdown.Converter.js"></script>
+<style>
+    #error_msg {
+        border: 1px dashed #C00;
+        padding: 5px;
+        color: #C00;
+        margin: 10px 2px;
+        display: none;
+    }
+
+    .toolUsing textarea {
+        min-height: 400px;
+        font-size: 12px;
+    }
+
+    .Result, .Code {
+        border: 1px solid #ccc;
+        width: 410px;
+        height: 400px;
+        overflow-x: hidden;
+    }
+
+    .CodeMirror {
+        width: 410px;
+        min-height: 400px;
+    }
+
+    .CodeMirror-scroll {
+        height: auto;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+</style>
+<div id="mainContent" class="wrapper">
+    <div class="toolName">在线 Markdown 编译器</div>
+    <pre id='error_msg' class='error_msg'></pre>
+    <div class="toolUsing clearfix">
+        <div class="leftBar">
+            <div class="Code">
+<textarea name='less' id='markdown_source' onkeyup="compile();">
+# 中文测试
+
+### Header 3
+
+> This is a blockquote.
+>
+> This is the second paragraph in the blockquote.
+>
+> ## This is an H2 in a blockquote
+</textarea>
+            </div>
+        </div>
+        <div class="operateLR">
+            <button id="com_btn" class="btn btn-primary" onclick="compile();" type="button" data-loading-text="正在编译...">
+                <i class="icon-chevron-right icon-white"></i> HTML
+            </button>
+            <br><br>
+            <button class="btn btn-primary active" data-toggle="button" id="realtime">实时预览</button>
+        </div>
+        <div class="rightBar">
+            <div class="Result">
+    				<textarea name='css' id='markdown_result'>
+    				</textarea>
+            </div>
+        </div>
+    </div>
+    <div id="realtime-wrapper" style="margin-top:10px;">
+        <lalel>实时预览：</lalel>
+        <div id="realtime-preview" class="well" style="margin-top:10px;">
+        </div>
+    </div>
+</div>
+<script type='text/javascript'>
+    $(function(){
+        $("#realtime").click(function(){
+            $("#realtime-wrapper").toggle();
+        });
+    });
+    <!--
+    var editor1 = CodeMirror.fromTextArea(document.getElementById("markdown_source"), {
+        mode: "markdown",
+        lineNumbers: true,
+        lineWrapping: true,
+        onCursorActivity: function() {
+            editor1.setLineClass(hlLine, null, null);
+            hlLine = editor1.setLineClass(editor1.getCursor().line, null, "activeline");
+        },
+        onChange:function(){
+            compile();
+        }
+    });
+    var hlLine = editor1.setLineClass(0, "activeline");
+    var editor2 = CodeMirror.fromTextArea(document.getElementById("markdown_result"), {
+        mode: "text/html",
+        lineNumbers: true,
+        lineWrapping: true,
+        onCursorActivity: function() {
+            editor2.setLineClass(hlLine, null, null);
+            hlLine = editor2.setLineClass(editor2.getCursor().line, null, "activeline");
+        }
+    });
+
+    var hlLine = editor2.setLineClass(0, "activeline");
+    function compile(){
+        var markdown = editor1.getValue();
+        $("#com_btn").button("loading");
+        var converter = new Markdown.Converter();
+        var html = converter.makeHtml(markdown);
+        editor2.setValue(html);
+        $("#com_btn").button("reset");
+        $("#realtime-preview").html(html);
+    }
+    //-->
+</script>
+
+</body>
+</html>

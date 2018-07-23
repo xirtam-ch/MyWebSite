@@ -36,6 +36,9 @@
     ga('create', 'UA-75028208-3', 'auto');
     ga('send', 'pageview');
 
+    function toBottom() {
+        bottom.scrollIntoView();
+    }
 </script>
 <body>
 <div class="main" id="home">
@@ -77,14 +80,22 @@
             <li><a href="https://github.com/xirtam-ch"><i class="fa fa-github"></i></a></li>
             <li><a href="http://www.cnblogs.com/xirtam/"><i class="fa fa-rss"></i></a></li>
             <li><a href="http://music.163.com/#/user/home?id=70012310"><i class="fa fa-music"></i></a></li>
-
+            <li><a href="https://www.youtube.com/channel/UC_Hwaf_pwdrW_YHVQ_lPJ5A/playlists"><i
+                    class="fa fa-youtube"></i></a></li>
         </ul>
     </div>
     <div class="container" align="center">
-        <br/>
-        <br/>
-        <a href="tools.html">
-            <button id="tools_btn" type="button" class="btn btn-primary">工具集</button>
+        <br/><br/>
+        <a href="javascript:toBottom();">
+            <svg t="1532310868167" class="icon" style="fill: #eeeeee;" viewBox="0 0 1024 1024" version="1.1"
+                 xmlns="http://www.w3.org/2000/svg" p-id="1053"
+                 width="40" height="40">
+                <defs>
+                    <style type="text/css"></style>
+                </defs>
+                <path d="M1024 283.927273L521.309091 781.963636c-4.654545 4.654545-13.963636 4.654545-23.272727 0L0 283.927273l46.545455-46.545455 465.454545 465.454546 465.454545-465.454546 46.545455 46.545455z"
+                      p-id="1054"></path>
+            </svg>
         </a>
     </div>
 
@@ -121,14 +132,14 @@
                         <div class="clearfix"></div>
                     </div>
                 </a>
-                <a href="https://im.qq.com/index.shtml">
+                <a href="tools.html">
                     <div class="col-md-4 w3ls_footer_grid_left">
                         <div class="w3ls_footer_grid_leftl">
-                            <i class="fa fa-qq" aria-hidden="true"></i>
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
                         </div>
                         <div class="w3ls_footer_grid_leftr">
-                            <h4>QQ</h4>
-                            <p>751348449</p>
+                            <h4>Tools</h4>
+                            <p>一些便利工具</p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -137,7 +148,7 @@
             </div>
         </div>
     </div>
-    <div class="w3l_footer_pos">
+    <div id="bottom" class="w3l_footer_pos">
         <p>Design by Xirtam</a></p>
     </div>
 </div>

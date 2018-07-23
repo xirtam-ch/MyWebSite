@@ -13,7 +13,6 @@ body,button,input,select,textarea {
 }
 
 body{
-    background: url(../img/headerBg.gif) repeat-x;
 }
 
 ul,li {
@@ -253,7 +252,6 @@ img,input {
 
 /*  public  */
 #header { /*  閲嶇疆header  */
-    /*background: #006cbf url(../img/headerBg.gif) left bottom repeat-x;*/
     height: 55px;
     position: relative;
     z-index: 1;
